@@ -1,0 +1,32 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Random rand = new Random();
+        int numberToGuess = rand.Next(1, 101); // число от 1 до 100
+        int userGuess = 0;
+
+        Console.WriteLine("Угадай число от 1 до 100!");
+
+        while (userGuess != numberToGuess)
+        {
+            Console.Write("Введи число: ");
+            string input = Console.ReadLine();
+
+            if (!int.TryParse(input, out userGuess))
+            {
+                Console.WriteLine("Пожалуйста, введи корректное число.");
+                continue;
+            }
+
+            if (userGuess < numberToGuess)
+                Console.WriteLine("Слишком маленькое число.");
+            else if (userGuess > numberToGuess)
+                Console.WriteLine("Слишком большое число.");
+            else
+                Console.WriteLine("Поздравляю! Ты угадал число!");
+        }
+    }
+}
