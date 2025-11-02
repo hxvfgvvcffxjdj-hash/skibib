@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+
+class TodoList
+{
+    static List<string> tasks = new List<string>();
+    
+    static void Main()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("📝 Мой список задач\n");
+            
+            if (tasks.Count == 0)
+                Console.WriteLine("Список пуст. Добавь первую задачу!");
+            else
+                for (int i = 0; i < tasks.Count; i++)
+                    Console.WriteLine($"{i + 1}. {tasks[i]}");
+            
+            Console.WriteLine("\n1 - Добавить | 2 - Удалить | 0 - Выход");
+            Console.Write("Выбери действие: ");
+            
+            string choice = Console.ReadLine();
+            
+            switch (choice)
+            {
+                case "1":
+                    AddTask();
+                    break;
+                case "2":
+                    RemoveTask();
+                    break;
+                case "0":
+                    return;
+            }
+        }
+    }
+    
+    static void AddTask()
+    {
+        Console.Write("Введи задачу: ");
+        string task = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(task))
+            tasks.Add(task);
+    }
+    
+    static void RemoveTask()
+    {
+        if (tasks.Count == 0) return;
+        
+        Console.Write("Номер задачи для удаления: ");
+        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= tasks.Count)
+            tasks.RemoveAt(index - 1);
+    }
+}
